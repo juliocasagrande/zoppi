@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Zoppi — Ideias para deixar o site mais bonito</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#1D2B7F;
+    --navy-dark:#0d1640;
+    --navy-deep:#080d2a;
+    --navy-light:#2E3FA0;
+    --orange:#E86020;
+    --orange-h:#cf521a;
+    --orange-soft:#f8a06a;
+    --steel:#5b6478;
+    --steel-lt:#8892A4;
+    --line:#E2E5EC;
+    --paper:#F4F5F8;
+    --paper-warm:#EFEAE3;
+    --ink:#1A1C2E;
+    --bg:#FAFAF8;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;font-size:16px}
+  body{
+    font-family:'Barlow',sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+  }
+  ul{list-style:none}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+
+  /* ── PAGE SHELL ── */
+  .page{
+    max-width:1280px;
+    margin:0 auto;
+    padding:64px 48px 120px;
+  }
+
+  .page-head{
+    border-bottom:1px solid var(--line);
+    padding-bottom:32px;
+    margin-bottom:56px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:32px;
+    align-items:end;
+  }
+  .page-head h1{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;
+    font-size:clamp(2.2rem,4vw,3.4rem);
+    text-transform:uppercase;
+    letter-spacing:-0.01em;
+    line-height:1.0;
+    color:var(--ink);
+  }
+  .page-head h1 em{font-style:normal;color:var(--orange)}
+  .page-head p{
+    color:var(--steel);
+    font-size:1.05rem;
+    line-height:1.55;
+    max-width:640px;
+    margin-top:14px;
+  }
+  .page-meta{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.72rem;
+    text-align:right;
+    color:var(--steel-lt);
+    line-height:1.7;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+  .page-meta b{color:var(--ink);display:block;font-weight:600}
+
+  /* ── INDEX / TOC ── */
+  .toc{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-bottom:80px;
+  }
+  .toc a{
+    background:var(--bg);
+    padding:18px 20px;
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    transition:background 0.2s;
+  }
+  .toc a:hover{background:#fff}
+  .toc-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.7rem;
+    color:var(--orange);
+    font-weight:600;
+    letter-spacing:0.08em;
+    margin-top:2px;
+  }
+  .toc-title{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    font-size:1.05rem;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    line-height:1.15;
+    color:var(--ink);
+  }
+
+  /* ── IDEA BLOCK ── */
+  .idea{
+    margin-bottom:96px;
+    scroll-margin-top:32px;
+  }
+  .idea-head{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    gap:24px;
+    align-items:baseline;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:18px;
+    margin-bottom:36px;
+  }
+  .idea-num{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:900;
+    font-size:3.5rem;
+    line-height:0.8;
+    color:var(--orange);
+    letter-spacing:-0.02em;
+  }
+  .idea-head h2{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;
+    font-size:clamp(1.6rem,2.6vw,2.4rem);
+    text-transform:uppercase;
+    letter-spacing:0.005em;
+    line-height:1.05;
+  }
+  .idea-head h2 em{font-style:normal;color:var(--orange)}
+  .idea-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.68rem;
+    color:var(--steel);
+    background:var(--paper);
+    padding:6px 10px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    border:1px solid var(--line);
+    white-space:nowrap;
+  }
+  .idea-body{
+    color:var(--steel);
+    font-size:1rem;
+    line-height:1.65;
+    max-width:860px;
+    margin-bottom:32px;
+  }
+  .idea-body strong{color:var(--ink);font-weight:600}
+
+  /* Compare grid */
+  .compare{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .panel{
+    background:#fff;
+    border:1px solid var(--line);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .panel-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px;
+    border-bottom:1px solid var(--line);
+    background:var(--bg);
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--steel);
+  }
+  .panel-head .pill{
+    padding:4px 10px;
+    font-weight:600;
+    font-size:0.65rem;
+    letter-spacing:0.1em;
+  }
+  .pill-before{background:#f0e7e0;color:#8b5a3a;border:1px solid #e0d2c4}
+  .pill-after{background:#1A1C2E;color:#fff}
+  .panel-body{
+    padding:0;
+    flex:1;
+    min-height:340px;
+    position:relative;
+  }
+  .notes{
+    padding:14px 18px;
+    border-top:1px dashed var(--line);
+    font-size:0.85rem;
+    color:var(--steel);
+    line-height:1.55;
+  }
+  .notes b{color:var(--ink);font-weight:600;font-family:'JetBrains Mono',monospace;font-size:0.78rem}
+
+  /* ─────────────────────────────────────────
+     IDEA 1 — HERO (more editorial / blueprint)
+  ───────────────────────────────────────── */
+
+  /* BEFORE: simplified clone of current hero */
+  .hero-before{
+    height:100%;
+    background:linear-gradient(135deg,#0d1640 0%,#1D2B7F 55%,#1a3a7a 100%);
+    color:#fff;
+    padding:32px 28px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-before::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(232,96,32,0.06) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(232,96,32,0.06) 1px,transparent 1px);
+    background-size:30px 30px;
+  }
+  .hero-before > *{position:relative}
+  .hb-eyebrow{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Inter',sans-serif;font-size:0.65rem;
+    text-transform:uppercase;letter-spacing:0.2em;
+    color:rgba(255,255,255,0.7);margin-bottom:14px;
+  }
+  .hb-eyebrow::before{content:'';width:30px;height:2px;background:var(--orange)}
+  .hb-title{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;font-size:2rem;line-height:1.0;
+    text-transform:uppercase;margin-bottom:14px;
+  }
+  .hb-title em{font-style:normal;color:var(--orange)}
+  .hb-sub{font-size:0.78rem;color:rgba(255,255,255,0.7);line-height:1.55;margin-bottom:18px;max-width:280px}
+  .hb-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .hb-btn{padding:8px 14px;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-family:'Barlow',sans-serif}
+  .hb-btn-primary{background:var(--orange);color:#fff}
+  .hb-btn-outline{border:1.5px solid rgba(255,255,255,0.5);color:#fff}
+  /* fake crane */
+  .hb-crane{position:absolute;right:18px;bottom:24px;width:140px;height:120px;opacity:0.55}
+  .hb-crane .b{position:absolute;left:18%;bottom:20%;width:78%;height:3px;background:rgba(255,255,255,0.3);transform:rotate(-30deg);transform-origin:left}
+  .hb-crane .c{position:absolute;left:72%;top:17%;width:1.5px;height:44%;background:rgba(255,255,255,0.5)}
+  .hb-crane .l{position:absolute;left:calc(72% - 18px);top:65%;width:36px;height:14px;background:rgba(232,96,32,0.7)}
+
+  /* AFTER: editorial hero with blueprint composition */
+  .hero-after{
+    height:100%;
+    background:#0a0f24;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:1.15fr 1fr;
+  }
+  .ha-left{
+    padding:36px 30px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    z-index:2;
+  }
+  .ha-left::before{
+    content:'';position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 0% 100%,rgba(232,96,32,0.18) 0%,transparent 55%),
+      linear-gradient(180deg,#0a0f24 0%,#10173a 100%);
+    z-index:-1;
+  }
+  .ha-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.65rem;
+    color:var(--orange);
+    letter-spacing:0.18em;
+    margin-bottom:18px;
+    text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .ha-tag::before{content:'';width:14px;height:1px;background:var(--orange)}
+  .ha-tag::after{content:'';width:5px;height:5px;background:var(--orange);border-radius:50%}
+  .ha-title{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;font-size:2.4rem;line-height:0.95;
+    text-transform:uppercase;margin-bottom:14px;
+    letter-spacing:-0.005em;
+  }
+  .ha-title em{font-style:normal;color:var(--orange);font-weight:900}
+  .ha-title .stroke{
+    -webkit-text-stroke:1.5px rgba(255,255,255,0.45);
+    color:transparent;
+    font-weight:900;
+  }
+  .ha-sub{font-size:0.78rem;color:rgba(255,255,255,0.62);line-height:1.6;margin-bottom:20px;max-width:300px}
+  .ha-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .ha-btn{padding:9px 16px;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;font-family:'Barlow',sans-serif;display:inline-flex;align-items:center;gap:6px}
+  .ha-btn-primary{background:var(--orange);color:#fff;box-shadow:0 6px 18px rgba(232,96,32,0.35)}
+  .ha-btn-outline{border:1px solid rgba(255,255,255,0.25);color:#fff}
+  .ha-meta{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.62rem;
+    color:rgba(255,255,255,0.4);
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    display:flex;flex-direction:column;gap:4px;
+    border-top:1px solid rgba(255,255,255,0.1);
+    padding-top:14px;
+    max-width:240px;
+  }
+  .ha-meta span{display:flex;justify-content:space-between}
+  .ha-meta b{color:#fff;font-weight:500}
+
+  /* Right: blueprint composition */
+  .ha-right{
+    position:relative;
+    background:
+      linear-gradient(180deg,#0d1640 0%,#1a2660 100%);
+    overflow:hidden;
+  }
+  .ha-right::before{
+    content:'';position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px);
+    background-size:24px 24px;
+  }
+  .ha-right::after{
+    content:'';position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.1) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,0.1) 1px,transparent 1px);
+    background-size:120px 120px;
+  }
+  /* technical drawing of crane lift */
+  .ha-svg{
+    position:absolute;
+    inset:0;
+    width:100%;height:100%;
+    z-index:2;
+  }
+  .ha-corner{
+    position:absolute;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.55rem;
+    color:rgba(255,255,255,0.45);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    z-index:3;
+  }
+  .ha-corner-tl{top:14px;left:14px}
+  .ha-corner-tr{top:14px;right:14px;text-align:right}
+  .ha-corner-br{bottom:14px;right:14px;text-align:right}
+  .ha-corner b{color:var(--orange);font-weight:600}
+
+  /* ─────────────────────────────────────────
+     IDEA 2 — ICONS (custom rigging vs material)
+  ───────────────────────────────────────── */
+  .icon-row{display:flex;gap:0;height:100%}
+  .icon-cell{
+    flex:1;
+    border-right:1px solid var(--line);
+    padding:24px 16px;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    text-align:center;
+    gap:14px;
+    background:#fff;
+  }
+  .icon-cell:last-child{border-right:none}
+  .icon-cell .ico{
+    width:54px;height:54px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .icon-cell .ico svg{width:100%;height:100%}
+  .icon-cell .lab{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color:var(--ink);
+  }
+  /* before: pill icons in colored boxes */
+  .ico-before{background:rgba(29,43,127,0.06);border-radius:4px;padding:13px}
+  .ico-before svg{fill:var(--navy)}
+  /* after: line icons, stroke style */
+  .ico-after{padding:0}
+  .ico-after svg{stroke:var(--ink);stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .ico-after svg .accent{stroke:var(--orange);stroke-width:1.6}
+
+  /* ─────────────────────────────────────────
+     IDEA 3 — SERVICE CARDS (clinical vs editorial)
+  ───────────────────────────────────────── */
+  .svc-before, .svc-after{
+    padding:24px;
+    height:100%;
+    background:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+  .svc-before{background:#fff}
+  .svc-before .sb-num{
+    position:absolute;top:18px;right:24px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:2.5rem;font-weight:800;
+    color:rgba(29,43,127,0.05);
+  }
+  .svc-before .sb-icon{
+    width:46px;height:46px;background:rgba(29,43,127,0.06);
+    border-radius:4px;display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;
+  }
+  .svc-before .sb-icon svg{width:22px;height:22px;fill:var(--navy)}
+  .svc-before h4{
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;
+    font-size:1.05rem;text-transform:uppercase;letter-spacing:0.03em;
+    color:var(--ink);margin-bottom:10px;
+  }
+  .svc-before p{font-size:0.78rem;color:var(--steel);line-height:1.6;margin-bottom:16px}
+  .svc-before ul{display:flex;flex-direction:column;gap:6px}
+  .svc-before li{
+    font-size:0.74rem;color:var(--ink);padding-left:14px;
+    position:relative;opacity:0.85;
+  }
+  .svc-before li::before{
+    content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
+    width:5px;height:5px;background:var(--orange);border-radius:50%;
+  }
+
+  /* AFTER: editorial card with index, monospace meta, large title */
+  .svc-after{
+    background:#fff;
+    padding:0;
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+  }
+  .svc-after .sa-top{
+    display:grid;grid-template-columns:1fr auto;gap:12px;
+    padding:18px 22px;
+    border-bottom:1px solid var(--line);
+    align-items:center;
+  }
+  .svc-after .sa-idx{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.65rem;letter-spacing:0.12em;
+    color:var(--orange);text-transform:uppercase;
+  }
+  .svc-after .sa-icon{
+    width:28px;height:28px;
+  }
+  .svc-after .sa-icon svg{
+    width:100%;height:100%;
+    stroke:var(--ink);stroke-width:1.4;fill:none;
+    stroke-linecap:round;stroke-linejoin:round;
+  }
+  .svc-after .sa-icon .accent{stroke:var(--orange);stroke-width:1.6}
+  .svc-after .sa-body{padding:18px 22px}
+  .svc-after .sa-body h4{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;font-size:1.4rem;
+    text-transform:uppercase;letter-spacing:-0.005em;
+    line-height:1.0;color:var(--ink);margin-bottom:10px;
+  }
+  .svc-after .sa-body p{font-size:0.8rem;color:var(--steel);line-height:1.6}
+  .svc-after .sa-tags{
+    padding:14px 22px;
+    border-top:1px dashed var(--line);
+    display:flex;flex-wrap:wrap;gap:6px;
+  }
+  .svc-after .sa-tags span{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.62rem;letter-spacing:0.05em;
+    color:var(--steel);background:var(--paper);
+    padding:4px 8px;text-transform:uppercase;
+  }
+  .svc-after .sa-cta{
+    padding:14px 22px;
+    border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;
+    color:var(--ink);font-weight:600;
+    transition:background 0.2s;
+  }
+  .svc-after .sa-cta::after{
+    content:'→';color:var(--orange);font-size:1rem;
+  }
+
+  /* ─────────────────────────────────────────
+     IDEA 4 — STATS BAR (centered vs editorial)
+  ───────────────────────────────────────── */
+  .stats-before{
+    background:var(--navy);
+    height:100%;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    align-items:center;
+  }
+  .stb-item{
+    text-align:center;padding:24px 8px;
+    border-right:1px solid rgba(255,255,255,0.08);
+    color:#fff;
+  }
+  .stb-item:last-child{border-right:none}
+  .stb-num{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:1.8rem;font-weight:800;color:var(--orange);
+    line-height:1;margin-bottom:6px;
+  }
+  .stb-lab{
+    font-family:'Inter',sans-serif;font-size:0.62rem;
+    text-transform:uppercase;letter-spacing:0.1em;
+    color:rgba(255,255,255,0.55);
+  }
+
+  .stats-after{
+    background:#0a0f24;
+    height:100%;
+    color:#fff;
+    padding:24px;
+    display:flex;flex-direction:column;justify-content:center;gap:14px;
+  }
+  .sta-head{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.62rem;color:rgba(255,255,255,0.4);
+    letter-spacing:0.15em;text-transform:uppercase;
+    display:flex;justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    padding-bottom:10px;
+  }
+  .sta-head b{color:var(--orange);font-weight:500}
+  .sta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .sta-cell{
+    border-right:1px solid rgba(255,255,255,0.08);
+    padding:0 14px;
+  }
+  .sta-cell:last-child{border-right:none}
+  .sta-cell:first-child{padding-left:0}
+  .sta-name{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;font-size:1.7rem;
+    color:#fff;line-height:1;margin-bottom:6px;
+    letter-spacing:0.005em;
+    display:flex;align-items:baseline;gap:6px;
+  }
+  .sta-name::before{
+    content:'';width:5px;height:5px;background:var(--orange);
+    display:inline-block;
+  }
+  .sta-meta{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.58rem;color:rgba(255,255,255,0.6);
+    text-transform:uppercase;letter-spacing:0.08em;
+    line-height:1.4;
+  }
+  .sta-meta b{color:#fff;font-weight:500;display:block}
+
+  /* ─────────────────────────────────────────
+     IDEA 5 — SECTION HEADER (centered tag vs split)
+  ───────────────────────────────────────── */
+  .sh-before, .sh-after{
+    padding:36px 28px;
+    background:#fff;height:100%;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .shb-tag{
+    font-family:'Inter',sans-serif;font-size:0.65rem;
+    text-transform:uppercase;letter-spacing:0.18em;
+    color:var(--orange);margin-bottom:12px;
+  }
+  .shb-h{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;font-size:1.9rem;line-height:1.05;
+    text-transform:uppercase;color:var(--ink);
+    margin-bottom:14px;
+  }
+  .shb-h em{font-style:normal;color:var(--orange)}
+  .shb-p{font-size:0.85rem;color:var(--steel);line-height:1.6;max-width:380px}
+
+  /* AFTER: split with monospace numbering, rule, supporting visual */
+  .sha-row{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start;margin-bottom:18px}
+  .sha-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.72rem;color:var(--orange);
+    font-weight:600;letter-spacing:0.1em;
+    border:1px solid var(--orange);
+    padding:6px 10px;
+    text-transform:uppercase;
+  }
+  .sha-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.7rem;color:var(--steel);
+    letter-spacing:0.12em;text-transform:uppercase;
+    padding-top:8px;
+  }
+  .sha-tag b{color:var(--ink);font-weight:600}
+  .sha-h{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;font-size:2.1rem;line-height:0.95;
+    text-transform:uppercase;color:var(--ink);
+    margin-bottom:16px;
+    border-top:2px solid var(--ink);padding-top:18px;
+    letter-spacing:-0.005em;
+  }
+  .sha-h em{font-style:normal;color:var(--orange)}
+  .sha-p{font-size:0.88rem;color:var(--steel);line-height:1.65;max-width:420px}
+  .sha-p strong{color:var(--ink);font-weight:600}
+
+  /* ─────────────────────────────────────────
+     IDEA 6 — PRODUCT CARDS (gradient blue vs paper)
+  ───────────────────────────────────────── */
+  .pc-grid{display:grid;grid-template-columns:1fr;gap:0;height:100%}
+  .pc-before{
+    height:100%;background:#fff;
+    display:grid;grid-template-rows:140px 1fr;
+    overflow:hidden;
+  }
+  .pcb-thumb{
+    background:linear-gradient(135deg,#1D2B7F,#2E3FA0);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+  }
+  .pcb-thumb::before{
+    content:'';position:absolute;bottom:-30px;right:-30px;
+    width:120px;height:120px;background:rgba(232,96,32,0.2);border-radius:50%;
+  }
+  .pcb-thumb svg{width:46px;height:46px;fill:rgba(255,255,255,0.3);position:relative;z-index:1}
+  .pcb-body{padding:18px 22px;display:flex;flex-direction:column}
+  .pcb-cat{font-family:'Inter',sans-serif;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--orange);margin-bottom:6px}
+  .pcb-name{font-family:'Barlow',sans-serif;font-weight:600;font-size:0.95rem;color:var(--ink);margin-bottom:8px}
+  .pcb-desc{font-size:0.76rem;color:var(--steel);line-height:1.55;margin-bottom:14px;flex:1}
+  .pcb-foot{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--line)}
+  .pcb-price{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.2rem;color:var(--navy)}
+  .pcb-price small{font-size:0.65rem;color:var(--steel);font-family:'Inter',sans-serif;font-weight:400}
+  .pcb-buy{padding:7px 14px;background:var(--navy);color:#fff;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;font-family:'Barlow',sans-serif}
+
+  .pc-after{
+    height:100%;background:#fff;
+    display:grid;grid-template-rows:140px 1fr;
+    border-left:3px solid var(--orange);
+  }
+  .pca-thumb{
+    background:var(--paper-warm);
+    position:relative;overflow:hidden;
+    display:flex;align-items:flex-end;justify-content:flex-start;
+    padding:14px;
+  }
+  .pca-thumb::before{
+    content:'';position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(29,43,127,0.06) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(29,43,127,0.06) 1px,transparent 1px);
+    background-size:14px 14px;
+  }
+  .pca-tech{
+    position:absolute;
+    inset:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .pca-tech svg{width:90px;height:90px;stroke:var(--navy);stroke-width:1.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .pca-tech svg .accent{stroke:var(--orange);stroke-width:1.6}
+  .pca-meta{
+    position:relative;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.6rem;color:var(--steel);
+    text-transform:uppercase;letter-spacing:0.08em;
+    background:#fff;padding:3px 7px;border:1px solid var(--line);
+  }
+  .pca-body{padding:18px 22px;display:flex;flex-direction:column}
+  .pca-tagrow{
+    display:flex;justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .pca-cat{font-family:'JetBrains Mono',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--orange);font-weight:600}
+  .pca-fmt{font-family:'JetBrains Mono',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--steel)}
+  .pca-name{
+    font-family:'Barlow Condensed',sans-serif;font-weight:800;
+    font-size:1.25rem;line-height:1.05;text-transform:uppercase;
+    color:var(--ink);margin-bottom:8px;
+    letter-spacing:-0.005em;
+  }
+  .pca-desc{font-size:0.78rem;color:var(--steel);line-height:1.55;flex:1;margin-bottom:14px}
+  .pca-foot{
+    display:flex;justify-content:space-between;align-items:center;
+    border-top:1px solid var(--line);padding-top:12px;
+  }
+  .pca-price{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.15rem;color:var(--ink);display:flex;align-items:baseline;gap:5px}
+  .pca-price small{font-size:0.6rem;color:var(--steel);font-family:'JetBrains Mono',monospace;font-weight:500;text-transform:uppercase;letter-spacing:0.06em}
+  .pca-buy{
+    font-family:'JetBrains Mono',monospace;font-size:0.68rem;
+    text-transform:uppercase;letter-spacing:0.08em;color:var(--ink);
+    font-weight:600;display:inline-flex;align-items:center;gap:6px;
+    border-bottom:2px solid var(--orange);padding-bottom:2px;
+  }
+  .pca-buy::after{content:'→';color:var(--orange)}
+
+  /* ─────────────────────────────────────────
+     IDEA 7 — TYPE SCALE / hierarchy
+  ───────────────────────────────────────── */
+  .type-row{padding:24px 26px;background:#fff;height:100%;display:flex;flex-direction:column;gap:20px;justify-content:center}
+  .type-eyebrow{font-family:'Inter',sans-serif;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--orange)}
+  .tb-h1{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:2.1rem;line-height:1.05;color:var(--ink);text-transform:uppercase}
+  .tb-h2{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.3rem;text-transform:uppercase;color:var(--ink)}
+  .tb-p{font-family:'Barlow',sans-serif;font-size:0.88rem;color:var(--steel);line-height:1.6;font-weight:300}
+
+  .ta-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--orange);display:inline-flex;align-items:center;gap:8px}
+  .ta-eyebrow::before{content:'';width:5px;height:5px;background:var(--orange);border-radius:50%}
+  .ta-eyebrow::after{content:'';width:18px;height:1px;background:var(--orange)}
+  .ta-h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.6rem;line-height:0.92;color:var(--ink);text-transform:uppercase;letter-spacing:-0.01em}
+  .ta-h1 em{font-style:normal;color:var(--orange);font-weight:900}
+  .ta-h1 .stk{-webkit-text-stroke:1.5px var(--ink);color:transparent;font-weight:900}
+  .ta-h2{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.4rem;text-transform:uppercase;color:var(--ink);letter-spacing:-0.005em;border-left:3px solid var(--orange);padding-left:12px}
+  .ta-p{font-family:'Barlow',sans-serif;font-size:0.92rem;color:var(--ink);line-height:1.65;font-weight:400;text-wrap:pretty}
+  .ta-p span{color:var(--steel)}
+  .ta-meta{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--steel);letter-spacing:0.1em;text-transform:uppercase;display:flex;gap:14px;border-top:1px solid var(--line);padding-top:10px}
+  .ta-meta b{color:var(--ink);font-weight:600}
+
+  /* ─────────────────────────────────────────
+     IDEA 8 — WORKFLOW (squares vs timeline)
+  ───────────────────────────────────────── */
+  .wf-before, .wf-after{height:100%;background:#fff;padding:0}
+  .wfb-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:1px;background:var(--line);
+    border:1px solid var(--line);height:100%;
+  }
+  .wfb-cell{background:#fff;padding:18px}
+  .wfb-step{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;color:rgba(29,43,127,0.18);line-height:1;margin-bottom:12px}
+  .wfb-h{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.9rem;text-transform:uppercase;color:var(--ink);margin-bottom:6px;line-height:1.15}
+  .wfb-p{font-size:0.72rem;color:var(--steel);line-height:1.55}
+
+  /* timeline after */
+  .wfa{
+    padding:24px 26px;height:100%;
+    display:flex;flex-direction:column;justify-content:center;gap:14px;
+    position:relative;
+  }
+  .wfa-track{
+    position:relative;
+    border-left:2px solid var(--line);
+    padding-left:22px;
+    display:flex;flex-direction:column;gap:18px;
+  }
+  .wfa-row{position:relative}
+  .wfa-row::before{
+    content:'';position:absolute;
+    left:-29px;top:6px;
+    width:14px;height:14px;
+    background:#fff;border:2px solid var(--ink);
+  }
+  .wfa-row.active::before{background:var(--orange);border-color:var(--orange)}
+  .wfa-meta{
+    font-family:'JetBrains Mono',monospace;font-size:0.62rem;
+    text-transform:uppercase;letter-spacing:0.1em;color:var(--orange);
+    margin-bottom:4px;font-weight:600;
+  }
+  .wfa-h{
+    font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;
+    text-transform:uppercase;color:var(--ink);margin-bottom:4px;letter-spacing:-0.005em;
+  }
+  .wfa-p{font-size:0.76rem;color:var(--steel);line-height:1.5}
+
+  /* ─────────────────────────────────────────
+     IDEA 9 — ABOUT visual (animated SVG vs photo + caption frame)
+  ───────────────────────────────────────── */
+  .ab-before, .ab-after{height:100%;background:#fff;padding:24px}
+  .ab-before{display:grid;place-items:center;background:var(--paper)}
+  .abb-box{
+    width:90%;aspect-ratio:4/3;
+    background:linear-gradient(135deg,#0d1640,#2E3FA0);
+    position:relative;overflow:hidden;
+    box-shadow:14px 14px 0 var(--orange);
+  }
+  .abb-box::before{
+    content:'';position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.06) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,0.06) 1px,transparent 1px);
+    background-size:30px 30px;
+  }
+  .abb-fake{
+    position:absolute;inset:20%;
+    border:1px solid rgba(255,255,255,0.3);
+    background:rgba(255,255,255,0.05);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+    color:rgba(255,255,255,0.5);letter-spacing:0.1em;
+    text-transform:uppercase;
+  }
+
+  .ab-after{padding:0;background:var(--ink);position:relative;overflow:hidden;color:#fff}
+  /* photo placeholder */
+  .aba-photo{
+    position:absolute;inset:0;
+    background:
+      linear-gradient(180deg,rgba(10,15,36,0.2) 0%,rgba(10,15,36,0.85) 100%),
+      repeating-linear-gradient(45deg,#1a2454 0px,#1a2454 14px,#1f2c64 14px,#1f2c64 28px);
+  }
+  .aba-photo::before{
+    content:'OPERAÇÃO REAL';
+    position:absolute;
+    top:50%;left:50%;transform:translate(-50%,-50%);
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.7rem;letter-spacing:0.15em;
+    color:rgba(255,255,255,0.25);
+    border:1px dashed rgba(255,255,255,0.25);
+    padding:8px 14px;
+  }
+  .aba-frame{
+    position:absolute;
+    left:18px;right:18px;top:18px;bottom:18px;
+    border:1px solid rgba(255,255,255,0.18);
+    pointer-events:none;
+  }
+  .aba-corner{
+    position:absolute;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.55rem;letter-spacing:0.1em;
+    color:rgba(255,255,255,0.55);
+    text-transform:uppercase;
+    z-index:2;
+  }
+  .aba-corner b{color:var(--orange);font-weight:600}
+  .aba-tl{top:24px;left:28px}
+  .aba-tr{top:24px;right:28px;text-align:right}
+  .aba-cap{
+    position:absolute;
+    bottom:24px;left:28px;right:28px;
+    z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:14px;
+  }
+  .aba-cap h5{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;font-size:1.4rem;line-height:1.0;
+    text-transform:uppercase;color:#fff;
+    letter-spacing:-0.005em;
+    max-width:240px;
+  }
+  .aba-cap-meta{
+    font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+    color:rgba(255,255,255,0.65);letter-spacing:0.1em;text-transform:uppercase;
+    text-align:right;
+  }
+
+  /* ─────────────────────────────────────────
+     IDEA 10 — Tabs (underline vs technical buttons)
+  ───────────────────────────────────────── */
+  .tabs-box{padding:24px 24px;background:#fff;height:100%;display:flex;flex-direction:column;justify-content:center;gap:18px}
+  .tabs-before{display:flex;border-bottom:2px solid var(--line)}
+  .tabs-before button{
+    background:none;border:none;padding:12px 22px;cursor:default;
+    font-family:'Barlow',sans-serif;font-weight:600;font-size:0.85rem;
+    color:var(--steel);position:relative;
+  }
+  .tabs-before button.act{color:var(--navy)}
+  .tabs-before button.act::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--orange)}
+
+  .tabs-after{display:flex;gap:8px;flex-wrap:wrap}
+  .tabs-after button{
+    background:#fff;border:1px solid var(--line);
+    padding:10px 16px 10px 14px;cursor:default;
+    font-family:'JetBrains Mono',monospace;font-weight:500;
+    font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--steel);
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .tabs-after button .dot{width:6px;height:6px;background:var(--line)}
+  .tabs-after button.act{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .tabs-after button.act .dot{background:var(--orange)}
+  .tabs-after .count{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.6rem;color:var(--steel);
+    background:var(--paper);padding:2px 6px;
+  }
+  .tabs-after button.act .count{background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)}
+
+  /* ── FOOTER NOTE ── */
+  .endnote{
+    margin-top:60px;padding:32px;
+    background:var(--ink);color:#fff;
+    border-left:4px solid var(--orange);
+  }
+  .endnote h3{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:800;font-size:1.6rem;
+    text-transform:uppercase;margin-bottom:14px;letter-spacing:-0.005em;
+  }
+  .endnote h3 em{font-style:normal;color:var(--orange)}
+  .endnote p{
+    color:rgba(255,255,255,0.7);
+    line-height:1.65;font-size:0.95rem;
+    max-width:760px;
+  }
+  .endnote ul{
+    margin-top:18px;
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:8px 24px;
+  }
+  .endnote li{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.78rem;color:rgba(255,255,255,0.85);
+    letter-spacing:0.04em;text-transform:uppercase;
+    padding-left:18px;position:relative;
+  }
+  .endnote li::before{
+    content:'';position:absolute;left:0;top:0.7em;
+    width:10px;height:1px;background:var(--orange);
+  }
+
+  @media (max-width:900px){
+    .page{padding:36px 20px 80px}
+    .page-head{grid-template-columns:1fr}
+    .page-meta{text-align:left}
+    .toc{grid-template-columns:repeat(2,1fr)}
+    .compare{grid-template-columns:1fr}
+    .endnote ul{grid-template-columns:1fr}
+    .idea-head{grid-template-columns:auto 1fr;gap:14px}
+    .idea-tag{grid-column:1/-1}
+  }
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ══════ HEAD ══════ -->
+  <header class="page-head">
+    <div>
+      <h1>10 ideias para o site da <em>Zoppi</em> ficar mais bonito</h1>
+      <p>Você já tem uma boa base — paleta azul-marinho + laranja, Barlow Condensed nos títulos, estrutura de seções clara. As ideias abaixo refinam o que existe sem mudar a identidade: tornam a página mais <strong>editorial</strong> e <strong>técnica</strong>, dois adjetivos que combinam com engenharia de rigging.</p>
+    </div>
+    <div class="page-meta">
+      <b>Zoppi Engenharia</b>
+      Estudo de refinamento visual<br />
+      v1 · 10 ideias · antes / depois
+    </div>
+  </header>
+
+  <!-- ══════ TOC ══════ -->
+  <nav class="toc">
+    <a href="#i1"><span class="toc-num">01</span><span class="toc-title">Hero editorial</span></a>
+    <a href="#i2"><span class="toc-num">02</span><span class="toc-title">Ícones técnicos</span></a>
+    <a href="#i3"><span class="toc-num">03</span><span class="toc-title">Cards de serviço</span></a>
+    <a href="#i4"><span class="toc-num">04</span><span class="toc-title">Barra de credenciais</span></a>
+    <a href="#i5"><span class="toc-num">05</span><span class="toc-title">Cabeçalhos de seção</span></a>
+    <a href="#i6"><span class="toc-num">06</span><span class="toc-title">Cards de produto</span></a>
+    <a href="#i7"><span class="toc-num">07</span><span class="toc-title">Hierarquia tipográfica</span></a>
+    <a href="#i8"><span class="toc-num">08</span><span class="toc-title">Workflow / processo</span></a>
+    <a href="#i9"><span class="toc-num">09</span><span class="toc-title">Bloco "Sobre"</span></a>
+    <a href="#i10"><span class="toc-num">10</span><span class="toc-title">Tabs de produtos</span></a>
+  </nav>
+
+  <!-- ════════════════════════════════
+       IDEA 1 — HERO
+  ════════════════════════════════ -->
+  <section class="idea" id="i1">
+    <div class="idea-head">
+      <span class="idea-num">01</span>
+      <h2>Um hero <em>editorial</em>, não decorativo</h2>
+      <span class="idea-tag">Impacto: alto</span>
+    </div>
+    <p class="idea-body">O hero atual usa um SVG abstrato de guindaste decorativo, padrão de grid e formas geométricas — funciona, mas é genérico. A versão refinada divide a área em <strong>painel narrativo</strong> (esquerda) e <strong>painel técnico</strong> (direita) com uma planta vetorial real do guindaste. Adiciona dados em <strong>monospace</strong> (CREA, ART, normas) que dão credibilidade técnica imediata, e usa um título com peso 900 misturado com letras vazadas — mais editorial.</p>
+
+    <div class="compare">
+      <!-- BEFORE -->
+      <article class="panel">
+        <div class="panel-head"><span>HERO · ATUAL</span><span class="pill pill-before">Antes</span></div>
+        <div class="panel-body">
+          <div class="hero-before">
+            <div class="hb-eyebrow">Engenharia Especializada</div>
+            <h3 class="hb-title">Engenharia para<br />operações de<br /><em>alto risco.</em></h3>
+            <p class="hb-sub">Planos de rigging, içamentos, andaimes, linhas de vida e dispositivos especiais com cálculo, documentação técnica e responsabilidade profissional.</p>
+            <div class="hb-actions">
+              <span class="hb-btn hb-btn-primary">Ver Serviços</span>
+              <span class="hb-btn hb-btn-outline">Falar com Engenheiro</span>
+            </div>
+            <div class="hb-crane">
+              <div class="b"></div><div class="c"></div><div class="l"></div>
+            </div>
+          </div>
+        </div>
+        <div class="notes">
+          <b>OBSERVAÇÕES</b><br />
+          Composição centralizada, SVG decorativo, gradiente azul + laranja meio "AI-genérico". Sem contexto técnico no próprio hero.
+        </div>
+      </article>
+
+      <!-- AFTER -->
+      <article class="panel">
+        <div class="panel-head"><span>HERO · PROPOSTA</span><span class="pill pill-after">Depois</span></div>
+        <div class="panel-body">
+          <div class="hero-after">
+            <div class="ha-left">
+              <div class="ha-tag">Engenharia Especializada</div>
+              <h3 class="ha-title">Engenharia<br /><span class="stroke">PARA</span> operações<br />de <em>alto risco.</em></h3>
+              <p class="ha-sub">Planos de rigging, içamentos, andaimes e dispositivos especiais com cálculo e responsabilidade profissional.</p>
+              <div class="ha-actions">
+                <span class="ha-btn ha-btn-primary">Ver Serviços →</span>
+                <span class="ha-btn ha-btn-outline">Falar com engenheiro</span>
+              </div>
+              <div class="ha-meta">
+                <span><b>CREA-SC</b> Resp. Técnica</span>
+                <span><b>NR-11 / 12 / 18 / 35</b> Conformidade</span>
+                <span><b>ABNT NBR 16489</b> Içamentos</span>
+              </div>
+            </div>
+            <div class="ha-right">
+              <div class="ha-corner ha-corner-tl"><b>FIG.01</b><br />PLANO DE IÇAMENTO</div>
+              <div class="ha-corner ha-corner-tr">CARGA<br /><b>3.200 kg</b></div>
+              <div class="ha-corner ha-corner-br">RAIO<br /><b>R 12.5 m</b></div>
+              <svg class="ha-svg" viewBox="0 0 300 380" preserveAspectRatio="xMidYMid meet">
+                <!-- ground -->
+                <line x1="20" y1="340" x2="280" y2="340" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+                <!-- crane base -->
+                <rect x="34" y="296" width="46" height="44" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" fill="rgba(255,255,255,0.04)"/>
+                <line x1="36" y1="298" x2="78" y2="338" stroke="rgba(255,255,255,0.25)" stroke-width="0.8"/>
+                <line x1="78" y1="298" x2="36" y2="338" stroke="rgba(255,255,255,0.25)" stroke-width="0.8"/>
+                <!-- mast -->
+                <line x1="57" y1="296" x2="57" y2="80" stroke="rgba(255,255,255,0.55)" stroke-width="1.4"/>
+                <line x1="50" y1="296" x2="50" y2="80" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+                <line x1="64" y1="296" x2="64" y2="80" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+                <!-- truss diagonals -->
+                <g stroke="rgba(255,255,255,0.18)" stroke-width="0.7">
+                  <line x1="50" y1="100" x2="64" y2="120"/>
+                  <line x1="64" y1="100" x2="50" y2="120"/>
+                  <line x1="50" y1="140" x2="64" y2="160"/>
+                  <line x1="64" y1="140" x2="50" y2="160"/>
+                  <line x1="50" y1="180" x2="64" y2="200"/>
+                  <line x1="64" y1="180" x2="50" y2="200"/>
+                  <line x1="50" y1="220" x2="64" y2="240"/>
+                  <line x1="64" y1="220" x2="50" y2="240"/>
+                  <line x1="50" y1="260" x2="64" y2="280"/>
+                  <line x1="64" y1="260" x2="50" y2="280"/>
+                </g>
+                <!-- boom (orange) -->
+                <line x1="57" y1="80" x2="240" y2="140" stroke="#E86020" stroke-width="2.2" stroke-linecap="round"/>
+                <line x1="57" y1="80" x2="240" y2="140" stroke="rgba(232,96,32,0.4)" stroke-width="6" stroke-linecap="round" opacity="0.4"/>
+                <!-- back stay cable -->
+                <line x1="57" y1="80" x2="120" y2="50" stroke="rgba(255,255,255,0.4)" stroke-width="0.8" stroke-dasharray="3 3"/>
+                <line x1="120" y1="50" x2="240" y2="140" stroke="rgba(255,255,255,0.4)" stroke-width="0.8" stroke-dasharray="3 3"/>
+                <!-- hoist line -->
+                <line x1="240" y1="140" x2="240" y2="270" stroke="#fff" stroke-width="1.2"/>
+                <!-- hook -->
+                <path d="M 232 270 Q 232 285 240 285 Q 248 285 248 270" stroke="#E86020" stroke-width="2" fill="none"/>
+                <!-- load -->
+                <rect x="210" y="290" width="60" height="34" stroke="#fff" stroke-width="1.2" fill="rgba(232,96,32,0.18)"/>
+                <line x1="240" y1="285" x2="216" y2="290" stroke="rgba(255,255,255,0.6)" stroke-width="0.7"/>
+                <line x1="240" y1="285" x2="264" y2="290" stroke="rgba(255,255,255,0.6)" stroke-width="0.7"/>
+                <text x="240" y="312" fill="rgba(255,255,255,0.7)" font-family="JetBrains Mono" font-size="8" text-anchor="middle">3.2 t</text>
+                <!-- radius arc -->
+                <path d="M 100 340 A 80 80 0 0 1 240 320" stroke="rgba(232,96,32,0.5)" stroke-width="0.8" fill="none" stroke-dasharray="2 3"/>
+                <text x="170" y="318" fill="#E86020" font-family="JetBrains Mono" font-size="7" text-anchor="middle">R = 12.5 m</text>
+                <!-- dimension lines -->
+                <line x1="20" y1="340" x2="20" y2="80" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/>
+                <line x1="16" y1="80" x2="24" y2="80" stroke="rgba(255,255,255,0.4)" stroke-width="0.6"/>
+                <line x1="16" y1="340" x2="24" y2="340" stroke="rgba(255,255,255,0.4)" stroke-width="0.6"/>
+                <text x="14" y="220" fill="rgba(255,255,255,0.5)" font-family="JetBrains Mono" font-size="7" text-anchor="end">28 m</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="notes">
+          <b>OBSERVAÇÕES</b><br />
+          Divide o hero em narrativo + técnico. SVG vira <i>plano de içamento</i> com cotas, raio e carga. Monospace + texto vazado dão peso editorial. Mais "engenharia", menos "site genérico".
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       IDEA 2 — ICONS
+  ════════════════════════════════ -->
+  <section class="idea" id="i2">
+    <div class="idea-head">
+      <span class="idea-num">02</span>
+      <h2>Ícones <em>técnicos</em>, não Material Design</h2>
+      <span class="idea-tag">Impacto: alto</span>
+    </div>
+    <p class="idea-body">Os ícones atuais (folha-de-papel, escudo-com-check, círculo-com-check, balão-de-fala) são genéricos, vêm da biblioteca padrão do Material Design e não se conectam com o ofício. A versão refinada usa <strong>ícones lineares desenhados sob medida</strong> — um guindaste com lança e gancho, uma pasta de projeto com cota, uma manilha/grilhão, uma planta dobrada. Linhas finas (1.4pt) com acentos laranja em pontos-chave.</p>
+
+    <div class="compare">
+      <article class="panel">
+        <div class="panel-head"><span>ÍCONES · ATUAL</span><span class="pill pill-before">Antes</span></div>
+        <div class="panel-body">
+          <div class="icon-row">
+            <div class="icon-cell">
+              <div class="ico ico-before"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div>
+              <div class="lab">Projetos</div>
+            </div>
+            <div class="icon-cell">
+              <div class="ico ico-before"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+              <div class="lab">Consultoria</div>
+            </div>
+            <div class="icon-cell">
+              <div class="ico ico-before"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></div>
+              <div class="lab">Inspeções</div>
+            </div>
+            <div class="icon-cell">
+              <div class="ico ico-before"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+              <div class="lab">Segurança</div>
+            </div>
+          </div>
+        </div>
+        <div class="notes"><b>OBSERVAÇÕES</b><br />Material Icons preenchidos. Não falam de rigging; falam de qualquer empresa.</div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head"><span>ÍCONES · PROPOSTA</span><span class="pill pill-after">Depois</span></div>
+        <div class="panel-body">
+          <div class="icon-row">
+            <!-- Crane -->
+            <div class="icon-cell">
+              <div class="ico"><svg viewBox="0 0 32 32" class="ico-after">
+                <path d="M6 28 L6 6"/>
+                <path d="M3 28 L9 28"/>
+                <path d="M6 6 L26 12" class="accent"/>
+                <path d="M6 6 L12 3 L26 12" stroke-dasharray="2 2"/>
+                <path d="M22 12 L22 20"/>
+                <path d="M19 20 Q19 23 22 23 Q25 23 25 20" class="accent"/>
+                <rect x="18" y="24" width="8" height="4"/>
+              </svg></div>
+              <div class="lab">Içamento</div>
+            </div>
+            <!-- Project sheet with dimension -->
+            <div class="icon-cell">
+              <div class="ico"><svg viewBox="0 0 32 32" class="ico-after">
+                <rect x="5" y="4" width="22" height="24"/>
+                <path d="M9 9 L19 9"/>
+                <path d="M9 13 L23 13"/>
+                <path d="M9 17 L21 17"/>
+                <path d="M9 22 L9 26 L13 26" class="accent"/>
+                <path d="M9 22 L13 22 L13 26" class="accent" stroke-dasharray="1.5 1.5"/>
+                <rect x="20" y="21" width="5" height="5" class="accent"/>
+              </svg></div>
+              <div class="lab">Projeto + ART</div>
+            </div>
+            <!-- Shackle / manilha -->
+            <div class="icon-cell">
+              <div class="ico"><svg viewBox="0 0 32 32" class="ico-after">
+                <path d="M11 20 Q11 8 16 8 Q21 8 21 20"/>
+                <line x1="9" y1="20" x2="23" y2="20" class="accent"/>
+                <circle cx="11" cy="22" r="2"/>
+                <circle cx="21" cy="22" r="2"/>
+                <circle cx="16" cy="21" r="0.8" class="accent"/>
+                <path d="M5 28 L27 28"/>
+              </svg></div>
+              <div class="lab">Acessórios</div>
+            </div>
+            <!-- Anchor / line of life -->
+            <div class="icon-cell">
+              <div class="ico"><svg viewBox="0 0 32 32" class="ico-after">
+                <path d="M5 8 Q16 14 27 8" class="accent"/>
+                <line x1="5" y1="8" x2="5" y2="6"/>
+                <line x1="27" y1="8" x2="27" y2="6"/>
+                <circle cx="5" cy="6" r="1.5"/>
+                <circle cx="27" cy="6" r="1.5"/>
+                <line x1="16" y1="11" x2="16" y2="26"/>
+                <path d="M10 22 Q16 28 22 22"/>
+                <line x1="13" y1="14" x2="19" y2="14"/>
+              </svg></div>
+              <div class="lab">Linha de Vida</div>
+            </div>
+          </div>
+        </div>
+        <div class="notes"><b>OBSERVAÇÕES</b><br />Ícones desenhados sob medida — guindaste, prancha cotada, manilha, ancoragem. Falam o vocabulário do cliente.</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       IDEA 3 — SERVICE CARDS
+  ════════════════════════════════ -->
+  <section class="idea" id="i3">
+    <div class="idea-head">
+      <span class="idea-num">03</span>
+      <h2>Cards de serviço com <em>ritmo editorial</em></h2>
+      <span class="idea-tag">Impacto: médio-alto</span>
+    </div>
+    <p class="idea-body">O card atual empilha tudo na mesma região: ícone azul-claro, título, descrição, lista. Sem hierarquia clara. A versão refinada divide o card em <strong>três zonas</strong> — cabeçalho técnico (índice + ícone linear), conteúdo (título grande + descrição), rodapé (chips de escopo + CTA "Saiba mais →"). Mais respiro, mais legível, mais escaneável.</p>
+
+    <div class="compare">
+      <article class="panel">
+        <div class="panel-head"><span>SERVICE CARD · ATUAL</span><span class="pill pill-before">Antes</span></div>
+        <div class="panel-body">
+          <div class="svc-before">
+            <span class="sb-num">01</span>
+            <div class="sb-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div>
+            <h4>Elaboração de Projetos</h4>
+            <p>Projetos técnicos completos com memorial de cálculo, pranchas e emissão de ART para operações de risco.</p>
+            <ul>
+              <li>Plano de Rigging</li>
+              <li>Projeto de Andaime</li>
+              <li>Linha de Vida e Ancoragem</li>
+              <li>Dispositivos Especiais</li>
+              <li>Proteção de Máquinas — NR12</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head"><span>SERVICE CARD · PROPOSTA</span><span class="pill pill-after">Depois</span></div>
+        <div class="panel-body">
+          <div class="svc-after">
+            <div class="sa-top">
+              <div>
+                <div class="sa-idx">SVC.01 — Engenharia</div>
+              </div>
+              <div class="sa-icon"><svg viewBox="0 0 32 32">
+                <rect x="5" y="4" width="22" height="24"/>
+                <path d="M9 9 L19 9"/>
+                <path d="M9 13 L23 13"/>
+                <path d="M9 17 L21 17"/>
+                <rect x="20" y="21" width="5" height="5" class="accent"/>
+              </svg></div>
+            </div>
+            <div class="sa-body">
+              <h4>Elaboração<br />de Projetos</h4>
+              <p>Projetos técnicos completos com memorial de cálculo, pranchas em escala e emissão de ART para operações de risco.</p>
+            </div>
+            <div class="sa-tags">
+              <span>Plano de Rigging</span>
+              <span>Andaime</span>
+              <span>Linha de Vida</span>
+              <span>NR-12</span>
+              <span>+3</span>
+            </div>
+            <div class="sa-cta">Saiba mais</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       IDEA 4 — STATS / TRUST BAR
+  ════════════════════════════════ -->
+  <section class="idea" id="i4">
+    <div class="idea-head">
+      <span class="idea-num">04</span>
+      <h2>Barra de credenciais que <em>parece um carimbo</em></h2>
+      <span class="idea-tag">Impacto: médio</span>
+    </div>
+    <p class="idea-body">Hoje a barra mostra "CREA / ART / ABNT / NR" em laranja gigante e um label embaixo. Visualmente é um número fake (não tem número de verdade). A versão refinada trata como <strong>linha de credenciais</strong>: ponto laranja + sigla + linha extra com a NR/norma específica. Fica honesto e mais técnico — leitor entende imediatamente <i>qual</i> NR, <i>qual</i> norma ABNT.</p>
+
+    <div class="compare">
+      <article class="panel">
+        <div class="panel-head"><span>BARRA · ATUAL</span><span class="pill pill-before">Antes</span></div>
+        <div class="panel-body" style="min-height:200px">
+          <div class="stats-before">
+            <div class="stb-item"><div class="stb-num">CREA</div><div class="stb-lab">Resp. Técnica</div></div>
+            <div class="stb-item"><div class="stb-num">ART</div><div class="stb-lab">Projetos e Laudos</div></div>
+            <div class="stb-item"><div class="stb-num">ABNT</div><div class="stb-lab">Critérios Normativos</div></div>
+            <div class="stb-item"><div class="stb-num">NR</div><div class="stb-lab">Segurança em Campo</div></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head"><span>BARRA · PROPOSTA</span><span class="pill pill-after">Depois</span></div>
+        <div class="panel-body" style="min-height:200px">
+          <div class="stats-after">
+            <div class="sta-head"><span>CONFORMIDADE TÉCNICA</span><span><b>04</b> CREDENCIAIS</span></div>
+            <div class="sta-grid">
+              <div class="sta-cell">
+                <div class="sta-name">CREA-SC</div>
+                <div class="sta-meta"><b>Responsável</b>Eng. registrado</div>
+              </div>
+              <div class="sta-cell">
+                <div class="sta-name">ART</div>
+                <div class="sta-meta"><b>Emissão</b>Projetos · Laudos</div>
+              </div>
+              <div class="sta-cell">
+                <div class="sta-name">ABNT</div>
+                <div class="sta-meta"><b>NBR 16489</b>NBR 6494</div>
+              </div>
+              <div class="sta-cell">
+                <div class="sta-name">NR</div>
+                <div class="sta-meta"><b>11 / 12 / 18</b>35 · Trab. em altura</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       IDEA 5 — SECTION HEADER
+  ════════════════════════════════ -->
+  <section class="idea" id="i5">
+    <div class="idea-head">
+      <span class="idea-num">05</span>
+      <h2>Cabeçalhos de seção mais <em>arquitetônicos</em></h2>
+      <span class="idea-tag">Impacto: médio</span>
+    </div>
+    <p class="idea-body">Os cabeçalhos atuais seguem o padrão "tag pequena laranja + título grande + lead". Funcional, mas indistinguível de qualquer outro site corporativo. A versão refinada introduz <strong>numeração de seção</strong> em monospace ("§ 02 / SOLUÇÕES") e uma <strong>regra horizontal preta</strong> acima do título — referência direta a páginas de manual técnico. Cada seção do site fica numerada §01...§07.</p>
+
+    <div class="compare">
+      <article class="panel">
+        <div class="panel-head"><span>SECTION HEADER · ATUAL</span><span class="pill pill-before">Antes</span></div>
+        <div class="panel-body" style="min-height:300px">
+          <div class="sh-before">
+            <div class="shb-tag">O que fazemos</div>
+            <h3 class="shb-h">Soluções de <em>Engenharia</em><br />para operações críticas</h3>
+            <p class="shb-p">Atendemos indústrias, construtoras e empreiteiras que exigem precisão técnica e segurança normativa em cada operação.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head"><span>SECTION HEADER · PROPOSTA</span><span class="pill pill-after">Depois</span></div>
+        <div class="panel-body" style="min-height:300px">
+          <div class="sh-after">
+            <div class="sha-row">
+              <div class="sha-num">§ 02</div>
+              <div class="sha-tag"><b>Soluções</b> · O que fazemos</div>
+            </div>
+            <h3 class="sha-h">Engenharia para<br /><em>operações críticas</em></h3>
+            <p class="sha-p"><strong>Atendemos indústrias, construtoras e empreiteiras</strong> que exigem precisão técnica e segurança normativa em cada operação. Projeto, dimensionamento, laudo e suporte ao campo.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       IDEA 6 — PRODUCT CARDS
+  ════════════════════════════════ -->
+  <section class="idea" id="i6">
+    <div class="idea-head">
+      <span class="idea-num">06</span>
+      <h2>Cards de produto que mostram <em>o que tem dentro</em></h2>
+      <span class="idea-tag">Impacto: alto</span>
+    </div>
+    <p class="idea-body">Hoje todos os cards de "Produtos digitais" usam a mesma thumb com gradiente azul + ícone branco fantasma. O usuário não consegue diferenciar uma calculadora de um bloco AutoCAD. A proposta substitui a thumb por uma <strong>mini-amostra técnica</strong> em fundo de papel quadriculado: pré-visualização do bloco AutoCAD, da curva de capacidade, do cálculo. Mais útil, mais bonito, e diferencia o produto.</p>
+
+    <div class="compare">
+      <article class="panel">
+        <div class="panel-head"><span>PRODUTO · ATUAL</span><span class="pill pill-before">Antes</span></div>
+        <div class="panel-body" style="min-height:380px">
+          <div class="pc-before">
+            <div class="pcb-thumb"><svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg></div>
+            <div class="pcb-body">
+              <div class="pcb-cat">AutoCAD Block</div>
+              <div class="pcb-name">Bloco Dinâmico de Guindaste</div>
+              <div class="pcb-desc">Biblioteca completa de blocos dinâmicos de guindastes para uso em pranchas de rigging no AutoCAD.</div>
+              <div class="pcb-foot">
+                <div class="pcb-price">R$ <small>a consultar</small></div>
+                <span class="pcb-buy">Consultar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head"><span>PRODUTO · PROPOSTA</span><span class="pill pill-after">Depois</span></div>
+        <div class="panel-body" style="min-height:380px">
+          <div class="pc-after">
+            <div class="pca-thumb">
+              <div class="pca-tech">
+                <svg viewBox="0 0 100 100">
+                  <line x1="10" y1="80" x2="90" y2="80"/>
+                  <rect x="14" y="70" width="14" height="10"/>
+                  <line x1="21" y1="70" x2="21" y2="22"/>
+                  <line x1="21" y1="22" x2="80" y2="40" class="accent"/>
+                  <line x1="21" y1="22" x2="40" y2="14"/>
+                  <line x1="40" y1="14" x2="80" y2="40" stroke-dasharray="2 2"/>
+                  <line x1="80" y1="40" x2="80" y2="62"/>
+                  <path d="M 76 62 Q 76 67 80 67 Q 84 67 84 62" class="accent"/>
+                  <rect x="74" y="69" width="14" height="8" class="accent"/>
+                  <path d="M 36 80 A 30 30 0 0 1 80 65" stroke="rgba(232,96,32,0.6)" stroke-dasharray="1.5 2"/>
+                </svg>
+              </div>
+              <span class="pca-meta">PRÉ-VIEW · DWG</span>
+            </div>
+            <div class="pca-body">
+              <div class="pca-tagrow">
+                <span class="pca-cat">PRD.01 · BLOCK</span>
+                <span class="pca-fmt">.DWG · 18 MB</span>
+              </div>
+              <h4 class="pca-name">Bloco Dinâmico<br />de Guindaste</h4>
+              <p class="pca-desc">Biblioteca de blocos dinâmicos para pranchas de rigging — variações de lança, contrapeso e raio configuráveis.</p>
+              <div class="pca-foot">
+                <span class="pca-price">R$ <small>sob consulta</small></span>
+                <span class="pca-buy">Consultar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       IDEA 7 — TYPE
+  ════════════════════════════════ -->
+  <section class="idea" id="i7">
+    <div class="idea-head">
+      <span class="idea-num">07</span>
+      <h2>Hierarquia tipográfica com <em>mais contraste</em></h2>
+      <span class="idea-tag">Impacto: alto</span>
+    </div>
+    <p class="idea-body">Você já tem três fontes (Barlow Condensed, Barlow, Inter) — boa escolha. Mas o uso é muito uniforme: títulos em peso 800, corpo em 300, todo mundo bem-comportado. A proposta troca a Inter por <strong>JetBrains Mono</strong> só nos elementos técnicos (eyebrows, metadados, numeração) e introduz títulos com <strong>peso 900 + variantes vazadas</strong>. Mais drama, mais identidade.</p>
+
+    <div class="compare">
+      <article class="panel">
+        <div class="panel-head"><span>TIPOGRAFIA · ATUAL</span><span class="pill pill-before">Antes</span></div>
+        <div class="panel-body" style="min-height:300px">
+          <div class="type-row">
+            <div class="type-eyebrow">Engenharia Especializada</div>
+            <h2 class="tb-h1">Engenharia para operações de alto risco</h2>
+            <h3 class="tb-h2">Soluções de Engenharia</h3>
+            <p class="tb-p">Atendemos indústrias, construtoras e empreiteiras que exigem precisão técnica e segurança normativa em cada operação.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head"><span>TIPOGRAFIA · PROPOSTA</span><span class="pill pill-after">Depois</span></div>
+        <div class="panel-body" style="min-height:300px">
+          <div class="type-row">
+            <div class="ta-eyebrow">Engenharia Especializada</div>
+            <h2 class="ta-h1"><span class="stk">ENG.</span> Para operações<br />de <em>alto risco</em></h2>
+            <h3 class="ta-h2">Soluções de Engenharia</h3>
+            <p class="ta-p">Atendemos indústrias, construtoras e empreiteiras que exigem <span>precisão técnica e segurança normativa</span> em cada operação.</p>
+            <div class="ta-meta"><span><b>Display:</b> Barlow Cond.</span><span><b>Texto:</b> Barlow</span><span><b>Técnico:</b> JetBrains Mono</span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       IDEA 8 — WORKFLOW
+  ════════════════════════════════ -->
+  <section class="idea" id="i8">
+    <div class="idea-head">
+      <span class="idea-num">08</span>
+      <h2>Processo como <em>linha do tempo</em>, não grade</h2>
+      <span class="idea-tag">Impacto: médio</span>
+    </div>
+    <p class="idea-body">Os 4 passos do "Como entregamos" hoje são uma grade 2x2 com números fantasmas atrás. O fluxo (1→2→3→4) não é visualmente óbvio. A proposta usa uma <strong>linha vertical</strong> com marcadores quadrados (que viram laranja-preenchido conforme o cliente avança). Mais natural, mais "etapas de obra", e funciona melhor no mobile do que a grade.</p>
+
+    <div class="compare">
+      <article class="panel">
+        <div class="panel-head"><span>WORKFLOW · ATUAL</span><span class="pill pill-before">Antes</span></div>
+        <div class="panel-body" style="min-height:340px">
+          <div class="wf-before">
+            <div class="wfb-grid">
+              <div class="wfb-cell"><div class="wfb-step">01</div><div class="wfb-h">Entendimento</div><div class="wfb-p">Coleta de dados da carga, local, interferências, equipamentos.</div></div>
+              <div class="wfb-cell"><div class="wfb-step">02</div><div class="wfb-h">Dimensionamento</div><div class="wfb-p">Cálculos, acessórios, verificação estrutural.</div></div>
+              <div class="wfb-cell"><div class="wfb-step">03</div><div class="wfb-h">Documentação</div><div class="wfb-p">Pranchas, memorial, ART quando aplicável.</div></div>
+              <div class="wfb-cell"><div class="wfb-step">04</div><div class="wfb-h">Suporte</div><div class="wfb-p">Apoio técnico para dúvidas de montagem e ajustes.</div></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head"><span>WORKFLOW · PROPOSTA</span><span class="pill pill-after">Depois</span></div>
+        <div class="panel-body" style="min-height:340px">
+          <div class="wfa">
+            <div class="wfa-track">
+              <div class="wfa-row active">
+                <div class="wfa-meta">FASE 01 · D+0</div>
+                <div class="wfa-h">Entendimento da operação</div>
+                <div class="wfa-p">Coleta de dados da carga, local, interferências e equipamentos disponíveis.</div>
+              </div>
+              <div class="wfa-row active">
+                <div class="wfa-meta">FASE 02 · D+3</div>
+                <div class="wfa-h">Dimensionamento técnico</div>
+                <div class="wfa-p">Cálculos, seleção de acessórios, verificação estrutural e compatibilização normativa.</div>
+              </div>
+              <div class="wfa-row">
+                <div class="wfa-meta">FASE 03 · D+7</div>
+                <div class="wfa-h">Documentação do projeto</div>
+                <div class="wfa-p">Pranchas, memorial de cálculo, ART, recomendações executivas.</div>
+              </div>
+              <div class="wfa-row">
+                <div class="wfa-meta">FASE 04 · CAMPO</div>
+                <div class="wfa-h">Suporte à execução</div>
+                <div class="wfa-p">Apoio técnico em campo, ajustes e revisão de soluções.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       IDEA 9 — ABOUT
+  ════════════════════════════════ -->
+  <section class="idea" id="i9">
+    <div class="idea-head">
+      <span class="idea-num">09</span>
+      <h2>Bloco "Sobre" com <em>foto real</em>, não SVG animado</h2>
+      <span class="idea-tag">Impacto: alto</span>
+    </div>
+    <p class="idea-body">A coluna esquerda do "Sobre" hoje é um caixote azul com SVG animado de prancha + guindaste — bonito, mas claramente decorativo. Em engenharia de risco, <strong>foto de operação real vende infinitamente mais</strong>. A proposta é uma moldura técnica preta com <strong>foto de uma operação sua</strong> (içamento real, andaime montado, equipe em campo) + cantos com metadados de projeto (cliente, peça, data, ART). Se não tiver fotos boas, você consegue numa visita de obra ou pede pro cliente mandar.</p>
+
+    <div class="compare">
+      <article class="panel">
+        <div class="panel-head"><span>SOBRE · ATUAL</span><span class="pill pill-before">Antes</span></div>
+        <div class="panel-body" style="min-height:320px">
+          <div class="ab-before">
+            <div class="abb-box">
+              <div class="abb-fake">SVG animado decorativo<br />(prancha + guindaste)</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head"><span>SOBRE · PROPOSTA</span><span class="pill pill-after">Depois</span></div>
+        <div class="panel-body" style="min-height:320px">
+          <div class="ab-after">
+            <div class="aba-photo"></div>
+            <div class="aba-frame"></div>
+            <div class="aba-corner aba-tl"><b>PRJ.2024-118</b><br />IÇAMENTO INDUSTRIAL</div>
+            <div class="aba-corner aba-tr">CLIENTE<br /><b>NDA</b></div>
+            <div class="aba-cap">
+              <h5>Trocador de calor<br />18.4 t · raio 14 m</h5>
+              <div class="aba-cap-meta">DEZ / 2024<br /><b style="color:var(--orange)">ART · CREA-SC</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="notes">
+          <b>OBSERVAÇÕES</b><br />Substitui a animação por uma foto de obra com moldura técnica e legenda factual. Carrega prova social ("isso eu fiz mesmo") em vez de decoração.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       IDEA 10 — TABS
+  ════════════════════════════════ -->
+  <section class="idea" id="i10">
+    <div class="idea-head">
+      <span class="idea-num">10</span>
+      <h2>Tabs de produtos como <em>botões técnicos</em></h2>
+      <span class="idea-tag">Impacto: baixo-médio</span>
+    </div>
+    <p class="idea-body">As tabs atuais usam underline laranja — bem-comportado, mas um pouco esquecível. A proposta troca por <strong>chips com contagem</strong> (tipo painel de software técnico): cada tab mostra quantos produtos tem dentro, ponto de status laranja, e quando ativo fica preto. Lê melhor, dá noção de catálogo, e fica visualmente mais "ferramenta".</p>
+
+    <div class="compare">
+      <article class="panel">
+        <div class="panel-head"><span>TABS · ATUAL</span><span class="pill pill-before">Antes</span></div>
+        <div class="panel-body" style="min-height:140px">
+          <div class="tabs-box">
+            <div class="tabs-before">
+              <button class="act">Produtos Digitais</button>
+              <button>Software & Calculadoras</button>
+              <button>Cursos</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head"><span>TABS · PROPOSTA</span><span class="pill pill-after">Depois</span></div>
+        <div class="panel-body" style="min-height:140px">
+          <div class="tabs-box">
+            <div class="tabs-after">
+              <button class="act"><span class="dot"></span>Digitais<span class="count">03</span></button>
+              <button><span class="dot"></span>Software<span class="count">03</span></button>
+              <button><span class="dot"></span>Cursos<span class="count">04</span></button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ══════ END NOTE ══════ -->
+  <aside class="endnote">
+    <h3>Próximos <em>passos</em></h3>
+    <p>Esse documento é uma exploração — escolha as ideias que mais te agradam e eu aplico direto no <code>index.html</code> e <code>style.css</code> do seu repositório. Você pode pedir tudo, só algumas, ou misturar (ex: hero novo + ícones técnicos + cards de produto, mantendo o resto). Posso também explorar variações de paleta ou fazer um redesign completo de uma seção específica.</p>
+    <ul>
+      <li>Diga quais ideias aplicar (ex: "01, 02, 06")</li>
+      <li>Posso aplicar tudo de uma vez no site real</li>
+      <li>Quer ver mais variações de alguma? Posso explorar 3-4 versões</li>
+      <li>Tem fotos de operação? Manda que entrego o "Sobre" pronto</li>
+    </ul>
+  </aside>
+
+</main>
+
+</body>
+</html>
