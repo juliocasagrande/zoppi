@@ -27,7 +27,7 @@ const heroEls = [
   { el: document.querySelector('.hero-title'),   delay: 400 },
   { el: document.querySelector('.hero-sub'),     delay: 600 },
   { el: document.querySelector('.hero-actions'), delay: 800 },
-  { el: document.querySelector('.hero-proof'),   delay: 1000 },
+  { el: document.querySelector('.hero-blueprint'), delay: 1000 },
 ];
 heroEls.forEach(({ el, delay }) => {
   if (!el) return;
@@ -54,40 +54,6 @@ const revealObserver = new IntersectionObserver(
 document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
   revealObserver.observe(el);
 });
-
-/* ── Stats counter animation ── */
-const counterObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const nums = entry.target.querySelectorAll('[data-count]');
-      nums.forEach(el => animateCount(el));
-      counterObserver.unobserve(entry.target);
-    });
-  },
-  { threshold: 0.5 }
-);
-
-const statsSection = document.getElementById('stats');
-if (statsSection) counterObserver.observe(statsSection);
-
-function animateCount(el) {
-  const target = parseFloat(el.dataset.count);
-  const suffix = el.dataset.suffix || '';
-  const prefix = el.dataset.prefix || '';
-  const duration = 1800;
-  const start = performance.now();
-
-  function step(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const ease = 1 - Math.pow(1 - progress, 3);
-    const current = target * ease;
-    el.textContent = prefix + (Number.isInteger(target) ? Math.floor(current) : current.toFixed(1)) + suffix;
-    if (progress < 1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
 
 /* ── Product tabs ── */
 document.querySelectorAll('.tab-btn').forEach(btn => {
